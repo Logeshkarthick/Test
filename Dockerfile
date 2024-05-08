@@ -1,12 +1,5 @@
-FROM tomcat:latest
- 
-COPY ${WAR_FILE} /usr/local/tomcat/webapps/SpringMVCHibernate.war
- 
-EXPOSE 8084
- 
-CMD [ "catalina.sh" , "run" ]
-
-stage('5. Dockerization')
-    {
-        bat 'docker image build -t springmvc .'
-    }
+FROM openjdk:17
+WORKDIR /app
+COPY ${JAR_FILE} app.jar
+EXPOSE 8080
+CMD ["java", "-jar", "SpringMVC.war"]
